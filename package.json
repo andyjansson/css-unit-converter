@@ -1,0 +1,26 @@
+{
+  "name": "css-unit-converter",
+  "version": "1.0.0",
+  "description": "Converts CSS values from one unit to another",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andyjansson/css-unit-converter.git"
+  },
+  "keywords": [
+    "css",
+    "value",
+    "unit",
+    "converter",
+    "convert"
+  ],
+  "author": "Andy Jansson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andyjansson/css-unit-converter/issues"
+  },
+  "homepage": "https://github.com/andyjansson/css-unit-converter"
+}
