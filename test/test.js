@@ -2,8 +2,8 @@ var test = require('tape'),
     convert = require('..');
 
 test("valid conversions", function (assert) {
-    var conversions = [
-        // source value, source unit, expected value, target unit
+	var conversions = [
+		// source value, source unit, expected value, target unit
 		[ 10, 'px', 10, 'px'],
 		[ 10, 'px', 0.26458, 'cm'],
 		[ 10, 'px', 2.64583, 'mm'],
@@ -73,7 +73,7 @@ test("valid conversions", function (assert) {
 		[ 10, 'dppx', 0.10417, 'dpi'],
 		[ 10, 'dppx', 0.26458, 'dpcm'],
 		[ 10, 'dppx', 10, 'dppx']
-    ];
+	];
 	conversions.forEach(function(e) {
 		var value = e[0],
 			unit = e[1],
@@ -104,7 +104,7 @@ test("invalid conversions", function (assert) {
 		'dpcm': ['px', 'cm', 'mm', 'in', 'pt', 'pc', 'deg', 'grad', 'rad', 'turn', 's', 'ms', 'Hz', 'kHz'],
 		'dppx': ['px', 'cm', 'mm', 'in', 'pt', 'pc', 'deg', 'grad', 'rad', 'turn', 's', 'ms', 'Hz', 'kHz']
 	};
-	
+
 	for (var unit in invalid_units) {
 		invalid_units[unit].forEach(function(targetUnit) {
 			var failed = false;
@@ -117,5 +117,24 @@ test("invalid conversions", function (assert) {
 			assert.true(failed, unit + ' -> ' + targetUnit);
 		});
 	}
+	assert.end();
+});
+
+test("precision", function (assert) {
+	var precision = 10;
+	var conversions = [
+		// source value, source unit, expected value, target unit
+		[ 10, 'px', 0.2645833333, 'cm'],
+		[ 10, 'px', 2.6458333333, 'mm'],
+		[ 10, 'px', 0.1041666667, 'in'],
+		[ 10, 'cm', 377.9527559055, 'px']
+	];
+	conversions.forEach(function(e) {
+		var value = e[0],
+		unit = e[1],
+		expected = e[2],
+		targetUnit = e[3];
+		assert.equal(convert(value, unit, targetUnit, precision), expected, unit + ' -> ' + targetUnit);
+	});
 	assert.end();
 });

@@ -48,7 +48,7 @@ var conversions = {
         'pt': 6.0/72.0,
         'pc': 1
     },
-    // angle 
+    // angle
     'deg': {
         'deg': 1,
         'grad': 0.9,
@@ -109,12 +109,13 @@ var conversions = {
     }
 };
 
-module.exports = function (value, sourceUnit, targetUnit) {
+module.exports = function (value, sourceUnit, targetUnit, precision) {
     if (!conversions.hasOwnProperty(targetUnit))
         throw new Error("Cannot convert to " + targetUnit);
 
-    if (!conversions[targetUnit].hasOwnProperty(sourceUnit)) 
+    if (!conversions[targetUnit].hasOwnProperty(sourceUnit))
         throw new Error("Cannot convert from " + sourceUnit + " to " + targetUnit);
 
-    return (conversions[targetUnit][sourceUnit] * value).toFixed(5) * 1;
+    precision = parseInt(precision) || 5;
+    return (conversions[targetUnit][sourceUnit] * value).toFixed(precision) * 1;
 };
