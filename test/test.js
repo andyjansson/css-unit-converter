@@ -138,3 +138,11 @@ test("precision", function (assert) {
 	});
 	assert.end();
 });
+
+test("falsey precision", function (assert) {
+    assert.equal(
+        convert(10, 'px', 'cm', false),
+        0.26458333333333334
+    );
+    assert.end();
+});
