@@ -115,7 +115,13 @@ module.exports = function (value, sourceUnit, targetUnit, precision) {
 
     if (!conversions[targetUnit].hasOwnProperty(sourceUnit))
         throw new Error("Cannot convert from " + sourceUnit + " to " + targetUnit);
-
-    precision = Math.pow(10, parseInt(precision) || 5);
-    return Math.round((conversions[targetUnit][sourceUnit] * value) * precision) / precision;
+    
+    var converted = conversions[targetUnit][sourceUnit] * value;
+    
+    if (precision !== false) {
+        precision = Math.pow(10, parseInt(precision) || 5);
+        return Math.round(converted * precision) / precision;
+    }
+    
+    return converted;
 };
